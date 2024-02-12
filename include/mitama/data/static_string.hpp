@@ -1,3 +1,5 @@
+#pragma once
+
 #include <cstddef>
 #include <string_view>
 #include <type_traits>

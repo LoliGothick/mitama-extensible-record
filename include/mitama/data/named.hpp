@@ -1,4 +1,7 @@
+#pragma once
+
 #include <mitama/data/internal/storage.hpp>
+#include <mitama/data/static_string.hpp>
 
 #include <compare>
 #include <concepts>
@@ -40,7 +43,8 @@ public:
     requires std::constructible_from<T, std::initializer_list<U>, Args...>
   constexpr explicit named(
       std::initializer_list<U> il, Args&&... args
-  ) noexcept(std::is_nothrow_constructible_v<
+  ) noexcept(std::
+                 is_nothrow_constructible_v<
                      T, std::initializer_list<U>, Args...>)
       : named_storage<T>{ il, std::forward<Args>(args)... }
   {
