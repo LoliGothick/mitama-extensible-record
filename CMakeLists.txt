@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 3.8)
+set(CMAKE_CXX_FLAGS "-std=c++23 -Wall -Wextra -pedantic-errors")
+project(mitama-extensible CXX)
+add_executable(mitama-extensible ./src/example.cpp)
+target_include_directories(mitama-extensible PRIVATE ./include)

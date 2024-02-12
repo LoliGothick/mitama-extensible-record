@@ -1,0 +1,5 @@
+[package]
+name = "mitama-extensible-record"
+version = "0.1.0"
+authors = ["Yuki WADA <loligothick@gmail.com>"]
+edition = "23"

@@ -1,0 +1,43 @@
+[config]
+skip_core_tasks = true
+default_to_workspace = false
+
+[tasks.build]
+dependencies = [ "cmake" ]
+command = "cmake"
+args = [ "--build", "build" ]
+
+[tasks.cmake]
+command = "cmake"
+args = [
+    "-S",
+    ".",
+    "-B",
+    "build",
+    "-DBUILD_TESTING=ON",
+]
+
+[tasks.lint]
+command = "poac"
+args = [
+    "lint",
+    "--exclude", "Catch2",
+    "--exclude", "mitama-utest-utilities",
+]
+
+[tasks.fmt]
+install_crate = "fd-find"
+cwd = "./include/"
+command = "fd"
+args = [
+    "-e", "hpp",
+    "-e", "cpp",
+    "-x", "clang-format", "-i"
+]
+
+[tasks.pretty]
+dependencies = [
+    "fmt",
+    "lint",
+    "build",
+]
