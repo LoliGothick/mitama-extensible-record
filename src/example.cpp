@@ -4,12 +4,19 @@
 
 using namespace mitama::literals::static_string_literals;
 
+using namespace mitama::literals;
+using namespace std::literals;
+
 int
 main()
 {
-  auto record = mitama::record{
-    "id"_ = 42,
-  };
+  // declare record type
+  using Person = mitama::record<mitama::named<"name"_, std::string>, mitama::named<"age"_, int>>;
 
-  std::cout << record["id"_] << std::endl;
+  // make record
+  Person john = mitama::empty += ("name"_ = "John"s) += ("age"_ = 42);
+
+  // access to rows
+  john["name"_]; // "John"
+  john["age"_];  // 42
 }
