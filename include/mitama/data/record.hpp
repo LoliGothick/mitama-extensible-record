@@ -33,7 +33,7 @@ template <class T, static_string Tag>
 concept named_as = named_as_impl<T, named<Tag>>::value;
 
 template <class T>
-concept named_any = named_as_impl<T, void>::value;
+concept named_any = named_as_impl<std::remove_cvref_t<T>, void>::value;
 } // namespace mitama::inline where
 
 // Concepts for Extensible Records
@@ -117,10 +117,13 @@ template <named_any... Rows>
 class record : protected Rows...
 {
   template <named_any... From>
-  struct FROM : protected From...
+  struct FROM : protected std::remove_cvref_t<From>...
   {
-    constexpr FROM(From... from) : From(from)... {}
-    using From::operator[]...;
+    constexpr FROM(From&&... from)
+        : std::remove_cvref_t<From>(std::forward<From>(from))...
+    {
+    }
+    using std::remove_cvref_t<From>::operator[]...;
   };
   template <named_any... Args>
   constexpr record(FROM<Args...> table) : Rows(table[Rows::tag])...
@@ -129,7 +132,7 @@ class record : protected Rows...
 
 public:
   template <named_any... Args>
-  constexpr record(Args... args)
+  constexpr record(Args&&... args)
       : record(FROM<Args...>(std::forward<Args>(args)...))
   {
   }
@@ -203,7 +206,8 @@ operator+=(record<>, std::tuple<Ex...> ex)
 }
 
 template <static_string... S>
-inline constexpr auto select = [](auto&& rec) { return std::tuple(rec[S]...); };
+inline constexpr auto select = [](const auto& rec)
+{ return std::forward_as_tuple(rec[S]...); };
 } // namespace mitama
 
 namespace mitama::inline where
