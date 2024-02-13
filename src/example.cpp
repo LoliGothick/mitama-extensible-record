@@ -1,6 +1,7 @@
 #include <mitama/data/record.hpp>
 
-#include <iostream>
+#include <string>
+#include <cassert>
 
 using namespace mitama::literals;
 using namespace std::literals;
@@ -22,13 +23,13 @@ main()
   Person john = mitama::empty_record += ("name"_ = "John"s) += ("age"_ = 42);
 
   // access to rows
-  john["name"_]; // "John"
-  john["age"_]; // 42
+  assert(john["name"_] == "John");
+  assert(john["age"_] == 42);
 
   // CTAD
   mitama::record tom = {
-    "age"_ = 42, // <-
-    "name"_ = "Tom"s, // <-
+      "age"_ = 24,      // <-
+      "name"_ = "Tom"s, // <-
   };
 
   // john = tom; // error
@@ -37,5 +38,8 @@ main()
   // named parameters?
   func({ "name"_ = "John"s, "age"_ = 42 });
 
-  [[maybe_unused]] auto [name, age] = john.dissolve();
+  auto [name, age] = john.dissolve();
+
+  assert(name == "Tom");
+  assert(age == 24);
 }

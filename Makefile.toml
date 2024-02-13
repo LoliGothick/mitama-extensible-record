@@ -2,6 +2,12 @@
 skip_core_tasks = true
 default_to_workspace = false
 
+[tasks.exec]
+task_runner = "@shell"
+script = '''
+./build/mitama-extensible
+'''
+
 [tasks.build]
 dependencies = [ "build-clang", "build-gcc" ]
 
@@ -58,4 +64,5 @@ dependencies = [
     "fmt",
     "lint",
     "build",
+    "exec",
 ]
