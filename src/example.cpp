@@ -8,7 +8,7 @@ int
 main()
 {
   auto record = mitama::record{
-    mitama::as<"id"_>(42),
+    "id"_ = 42,
   };
 
   std::cout << record["id"_] << std::endl;
