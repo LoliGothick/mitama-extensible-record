@@ -2,14 +2,14 @@
 
 #include <iostream>
 
-using namespace mitama::literals::static_string_literals;
-
 using namespace mitama::literals;
 using namespace std::literals;
 
 // declare record type
-using Person = mitama::record<
-    mitama::named<"name"_, std::string>, mitama::named<"age"_, int>>;
+using Person = mitama::record
+                < mitama::named<"name"_, std::string>
+                , mitama::named<"age"_, int>
+                >;
 
 void
 func(Person)

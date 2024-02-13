@@ -3,18 +3,36 @@ skip_core_tasks = true
 default_to_workspace = false
 
 [tasks.build]
-dependencies = [ "cmake" ]
+dependencies = [ "build-clang", "build-gcc" ]
+
+[tasks.build-clang]
+dependencies = [ "cmake-clang" ]
 command = "cmake"
 args = [ "--build", "build" ]
 
-[tasks.cmake]
+[tasks.build-gcc]
+dependencies = [ "cmake-gcc" ]
+command = "cmake"
+args = [ "--build", "build" ]
+
+[tasks.cmake-clang]
 command = "cmake"
 args = [
     "-S",
     ".",
     "-B",
     "build",
-    "-DBUILD_TESTING=ON",
+    "-DCMAKE_CXX_COMPILER=clang++",
+]
+
+[tasks.cmake-gcc]
+command = "cmake"
+args = [
+    "-S",
+    ".",
+    "-B",
+    "build",
+    "-DCMAKE_CXX_COMPILER=g++",
 ]
 
 [tasks.lint]

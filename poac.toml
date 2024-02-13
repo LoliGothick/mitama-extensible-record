@@ -2,4 +2,23 @@
 name = "mitama-extensible-record"
 version = "0.1.0"
 authors = ["Yuki WADA <loligothick@gmail.com>"]
-edition = "23"
+edition = "20"
+
+[lint.cpplint]
+filters = [
+  "-build/c++11",
+  "-build/include_order", # prioritize clang-format
+  "-build/include_subdir",
+  "-build/namespaces_literals",
+  "-legal/copyright",
+  "-readability/braces", # prioritize clang-format
+  "-readability/nolint", # ignore NOLINT comments for clang-tidy
+  "-readability/todo", # todo comments don't need a username
+  "-readability/alt_tokens",
+  "-readability/namespace",
+  "-runtime/explicit",
+  "-runtime/indentation_namespace", # inner namespace should be indented
+  "-runtime/references", # non-const reference rather than a pointer
+  "-whitespace",
+  "+whitespace/ending_newline",
+]

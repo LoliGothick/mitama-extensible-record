@@ -187,7 +187,7 @@ class record<>
 {
 };
 
-inline constexpr record<> empty_record {};
+inline constexpr record<> empty_record{};
 
 template <named_any Row>
 inline constexpr auto
