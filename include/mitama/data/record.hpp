@@ -134,7 +134,7 @@ public:
   {
   }
 
-  template <superset_of<record> Record>
+  template <mitamagic::superset_of<record> Record>
   constexpr record(shrink<Record> other) : Rows(other[Rows::tag])...
   {
   }
@@ -148,7 +148,7 @@ public:
   using spread = record<Rows..., New...>;
 
   template <static_string... Keys>
-  using shrink = make_record<erased<type_list<Rows...>, Keys...>>;
+  using shrink = make_record<mitamagic::erased<type_list<Rows...>, Keys...>>;
 
   template <named_any Ex>
   constexpr auto operator+=(Ex ex) const
@@ -220,6 +220,6 @@ concept has_rows = []<named_any... Rows>(std::type_identity<record<Rows...>>)
         )
         && ...
     );
-  }(sorted<Rows...>());
+  }(mitamagic::sorted<Rows...>());
 }(std::type_identity<Record>());
 }

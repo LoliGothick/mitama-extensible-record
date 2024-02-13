@@ -20,7 +20,7 @@ template <std::default_initializable T>
 inline constexpr T default_v{};
 }
 
-namespace mitama
+namespace mitama::mitamagic
 {
 // This is power of C++20
 // FYI:
@@ -146,4 +146,4 @@ struct is_superset_of<Record<A...>, Record<B...>>
 template <class A, class B>
 concept superset_of =
     is_superset_of<std::remove_cvref_t<A>, std::remove_cvref_t<B>>::value;
-} // namespace mitama
+} // namespace mitama::mitamagic

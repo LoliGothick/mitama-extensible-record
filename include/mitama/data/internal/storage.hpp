@@ -5,7 +5,7 @@
 #include <type_traits>
 #include <utility>
 
-namespace mitama
+namespace mitama::mitamagic
 {
 // primary
 // owned storage
