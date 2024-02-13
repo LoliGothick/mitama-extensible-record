@@ -16,9 +16,9 @@ namespace mitama
 {
 // Opaque-type that strict-typed via a phantom-parameter `Tag`.
 template <static_string Tag, class T = std::void_t<>>
-class named : named_storage<T>
+class named : mitamagic::named_storage<T>
 {
-  using storage = named_storage<T>;
+  using storage = mitamagic::named_storage<T>;
 
 public:
   static constexpr std::string_view str = decltype(Tag)::value;
@@ -35,7 +35,7 @@ public:
     requires std::constructible_from<T, Args...>
   constexpr explicit named(Args&&... args
   ) noexcept(std::is_nothrow_constructible_v<T, Args...>)
-      : named_storage<T>{ std::forward<Args>(args)... }
+      : mitamagic::named_storage<T>{ std::forward<Args>(args)... }
   {
   }
 
@@ -46,7 +46,7 @@ public:
   ) noexcept(std::
                  is_nothrow_constructible_v<
                      T, std::initializer_list<U>, Args...>)
-      : named_storage<T>{ il, std::forward<Args>(args)... }
+      : mitamagic::named_storage<T>{ il, std::forward<Args>(args)... }
   {
   }
 
@@ -58,7 +58,7 @@ public:
     )
   constexpr explicit(!std::is_convertible_v<U, T>)
       named(named<Id, U> from) noexcept(std::is_nothrow_constructible_v<T, U>)
-      : named_storage<T>{ from.value() }
+      : mitamagic::named_storage<T>{ from.value() }
   {
   }
 
