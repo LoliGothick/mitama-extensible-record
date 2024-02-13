@@ -27,7 +27,7 @@ main()
 
   // CTAD
   mitama::record tom = {
-    "age"_ = 42,      // <-
+    "age"_ = 42, // <-
     "name"_ = "Tom"s, // <-
   };
 
@@ -35,7 +35,7 @@ main()
   john = mitama::shrink(tom); // ok
 
   // named parameters?
-  func({"name"_ = "John"s, "age"_ = 42});
+  func({ "name"_ = "John"s, "age"_ = 42 });
 
   [[maybe_unused]] auto [name, age] = mitama::select<"name"_, "age"_>(john);
 }
