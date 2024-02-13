@@ -115,18 +115,6 @@ public:
   {
     return named::str <=> named<S>::str;
   }
-
-  template <class T>
-  constexpr auto operator=(T&& val) const
-  {
-    return named<Tag, T>(std::forward<T>(val));
-  }
-
-  template <class T>
-  constexpr auto operator%(T&& val) const
-  {
-    return named<Tag, T>(std::forward<T>(val));
-  }
 };
 
 // Overloading to make it easier to build `named`.

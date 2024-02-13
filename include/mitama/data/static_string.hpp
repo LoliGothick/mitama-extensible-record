@@ -36,6 +36,12 @@ operator<<(std::ostream& os, fixed_string<N, CharT> fs)
 
 namespace mitama
 {
+template <fixed_string>
+struct static_string;
+
+template <static_string, class>
+class named;
+
 // non-type template enabled static string class
 //
 // S: fixed_string<N, CharT>
@@ -57,6 +63,12 @@ struct static_string
   constexpr operator std::basic_string_view<char_type>() const
   {
     return value;
+  }
+
+  template <class T, class R = std::remove_cvref_t<T>>
+  inline constexpr auto operator=(T&& v)
+  {
+    return named<static_string<S>{}, R>{ std::forward<T>(v) };
   }
 };
 
