@@ -21,7 +21,7 @@ int
 main()
 {
   // make record
-  Person john = mitama::empty += ("name"_ = "John"s) += ("age"_ = 42);
+  Person john = mitama::empty_record += ("name"_ = "John"s) += ("age"_ = 42);
 
   // access to rows
   john["name"_]; // "John"

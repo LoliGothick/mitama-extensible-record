@@ -87,6 +87,7 @@ using make_record = make_record_impl<List>::type;
 // Extensible Records
 namespace mitama
 {
+// forward declaration
 template <named_any... Rows>
   requires distinct<Rows...>
 class record;
@@ -112,10 +113,12 @@ public:
 template <kind<of<record>> Record>
 shrink(Record&&) -> shrink<Record>;
 
+// record definition
 template <named_any... Rows>
   requires distinct<Rows...>
 class record : protected Rows...
 {
+  // private struct for private constructor
   template <named_any... From>
   struct FROM : protected std::remove_cvref_t<From>...
   {
@@ -125,6 +128,8 @@ class record : protected Rows...
     }
     using std::remove_cvref_t<From>::operator[]...;
   };
+
+  // private constructor
   template <named_any... Args>
   constexpr record(FROM<Args...> table) : Rows(table[Rows::tag])...
   {
@@ -182,7 +187,7 @@ class record<>
 {
 };
 
-inline constexpr record<> empty{};
+inline constexpr record<> empty_record {};
 
 template <named_any Row>
 inline constexpr auto
