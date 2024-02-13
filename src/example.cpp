@@ -1,7 +1,7 @@
 #include <mitama/data/record.hpp>
 
-#include <string>
 #include <cassert>
+#include <string>
 
 using namespace mitama::literals;
 using namespace std::literals;
@@ -28,8 +28,8 @@ main()
 
   // CTAD
   mitama::record tom = {
-      "age"_ = 24,      // <-
-      "name"_ = "Tom"s, // <-
+    "age"_ = 24, // <-
+    "name"_ = "Tom"s, // <-
   };
 
   // john = tom; // error
