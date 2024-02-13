@@ -101,4 +101,4 @@ public:
     return std::addressof(ref.get());
   }
 };
-} // namespace mitama
+} // namespace mitama::mitamagic
