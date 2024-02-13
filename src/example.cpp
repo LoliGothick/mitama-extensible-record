@@ -37,5 +37,5 @@ main()
   // named parameters?
   func({ "name"_ = "John"s, "age"_ = 42 });
 
-  [[maybe_unused]] auto [name, age] = mitama::select<"name"_, "age"_>(john);
+  [[maybe_unused]] auto [name, age] = john.dissolve();
 }
