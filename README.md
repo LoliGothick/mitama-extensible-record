@@ -29,7 +29,7 @@ main(o) (p); // type checks
 main(o) (q); // type error
 ```
 
-## Mitama.Data.Extensible.Record
+## mitama::record
 
 In TypeScript, it is implemented as a language feature, but in C++20, there is no such feature, so we need to emulate it somehow.
 The reference is the famous Haskell library **extensible** which emulates the same feature.
@@ -37,8 +37,8 @@ The reference is the famous Haskell library **extensible** which emulates the sa
 In the end I succeeded in making a library which allows the following syntax.
 
 ```cpp
-import Mitama.Data.Extensible.Record;
-#include <iostream>
+#include <mitama/data/record.hpp>
+#include <string>
 
 using namespace mitama::literals;
 using namespace std::literals;
@@ -52,8 +52,8 @@ int main() {
 
     // make record
     Person john = mitama::empty
-                += "name"_ = "John"s
-                += "age"_  = 42
+                += ("name"_ = "John"s)
+                += ("age"_  = 42)
                 ;
 
     // access to rows
@@ -71,7 +71,7 @@ These literals create a type `mitama::static_string` which is a structual type (
 
 Thus, `mitama::named<"age"_, int>` is a wrapped type of `int` named with `mitama::static_string`.
 
-You can construct `mitama::named<_, T>` by applying `operator%(static_string, T)`.
+You can construct `mitama::named<_, T>` by applying `static_string::operator=(T&&)`.
 
 ```cpp
 mitama::named age = "age"_ % 42;
