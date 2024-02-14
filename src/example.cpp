@@ -28,7 +28,7 @@ main()
 
   // CTAD
   mitama::record tom = {
-    "age"_ = 24, // <-
+    "age"_ = 24, // <------
     "name"_ = "Tom"s, // <-
   };
 
