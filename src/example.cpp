@@ -40,6 +40,6 @@ main()
 
   auto [name, age] = john.dissolve();
 
-  assert(name == "Tom");
-  assert(age == 24);
+  assert(name.value() == "Tom");
+  assert(age.value() == 24);
 }

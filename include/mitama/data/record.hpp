@@ -180,16 +180,7 @@ public:
 
   constexpr auto dissolve() const& noexcept
   {
-    return std::tuple{ this->operator[](std::remove_cvref_t<Rows>::tag)... };
-  }
-
-  constexpr auto dissolve() && noexcept
-  {
-    return std::forward_as_tuple(
-        std::forward<typeof<std::remove_cvref_t<Rows>::tag>>(
-            this->operator[](std::remove_cvref_t<Rows>::tag)
-        )...
-    );
+    return std::tuple{ Rows::clone()... };
   }
 };
 

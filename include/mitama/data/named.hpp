@@ -94,6 +94,8 @@ public:
     return *this;
   }
 
+  constexpr auto operator<=>(const named&) const = default;
+
 protected:
   template <auto S>
     requires(static_string<S>::value == str)
@@ -111,7 +113,7 @@ public:
   static constexpr static_string tag = Tag;
 
   template <static_string S>
-  constexpr std::strong_ordering operator<=>(named<S>) const noexcept
+  constexpr auto operator<=>(named<S>) const noexcept
   {
     return named::str <=> named<S>::str;
   }
@@ -131,14 +133,14 @@ as(T&& x)
 }
 
 template <auto S1, auto S2, class T1, class T2>
-constexpr auto
+inline constexpr auto
 operator+=(const named<S1, T1>& fst, const named<S2, T2>& snd)
 {
   return std::tuple{ fst, snd };
 }
 
 template <auto S, class T, class... Tail>
-constexpr auto
+inline constexpr auto
 operator+=(const named<S, T>& fst, std::tuple<Tail...> tail)
 {
   return std::apply(
